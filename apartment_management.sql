@@ -2,14 +2,14 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 11, 2024 at 05:55 PM
--- Server version: 8.2.0
--- PHP Version: 8.2.13
+-- Host: 127.0.0.1
+-- Generation Time: Dec 17, 2025 at 04:51 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+05:45";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,22 +27,20 @@ SET time_zone = "+05:45";
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `phone_number` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`admin_id`, `username`, `password`, `email`, `phone_number`) VALUES
-(1, 'Abhyudith', '12345', 'abhyudith@gmail.com', '9742911000');
+(1, 'aseem', '12345', 'aseemadkary.official@gmail.com', '9861296569');
 
 -- --------------------------------------------------------
 
@@ -50,15 +48,12 @@ INSERT INTO `admin` (`admin_id`, `username`, `password`, `email`, `phone_number`
 -- Table structure for table `apartment`
 --
 
-DROP TABLE IF EXISTS `apartment`;
-CREATE TABLE IF NOT EXISTS `apartment` (
-  `apartment_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `apartment` (
+  `apartment_id` int(11) NOT NULL,
   `building_name` varchar(255) NOT NULL,
   `unit_number` varchar(10) NOT NULL,
-  `owner_id` int NOT NULL,
-  PRIMARY KEY (`apartment_id`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `owner_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `apartment`
@@ -77,18 +72,13 @@ INSERT INTO `apartment` (`apartment_id`, `building_name`, `unit_number`, `owner_
 -- Table structure for table `complaint`
 --
 
-DROP TABLE IF EXISTS `complaint`;
-CREATE TABLE IF NOT EXISTS `complaint` (
-  `complaint_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `complaint` (
+  `complaint_id` int(11) NOT NULL,
   `description` text NOT NULL,
-  `tenant_id` int DEFAULT NULL,
-  `owner_id` int DEFAULT NULL,
-  `employee_id` int DEFAULT NULL,
-  PRIMARY KEY (`complaint_id`),
-  KEY `tenant_id` (`tenant_id`),
-  KEY `owner_id` (`owner_id`),
-  KEY `employee_id` (`employee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tenant_id` int(11) DEFAULT NULL,
+  `owner_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `complaint`
@@ -108,15 +98,12 @@ INSERT INTO `complaint` (`complaint_id`, `description`, `tenant_id`, `owner_id`,
 -- Table structure for table `complaints`
 --
 
-DROP TABLE IF EXISTS `complaints`;
-CREATE TABLE IF NOT EXISTS `complaints` (
-  `complaint_id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
-  `complaint_text` text,
+CREATE TABLE `complaints` (
+  `complaint_id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `complaint_text` text DEFAULT NULL,
   `complaint_date` date DEFAULT NULL,
-  `tenant_id` int DEFAULT NULL,
-  PRIMARY KEY (`complaint_id`),
-  KEY `tenant_id` (`tenant_id`)
+  `tenant_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -125,32 +112,26 @@ CREATE TABLE IF NOT EXISTS `complaints` (
 -- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `employee`;
-CREATE TABLE IF NOT EXISTS `employee` (
-  `employee_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `employee` (
+  `employee_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `admin_id` int DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `owner_id` int DEFAULT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`employee_id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `owner_id` int(11) DEFAULT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `email`, `phone_number`, `admin_id`, `username`, `password`, `owner_id`, `name`) VALUES
-(5, 'Sandhya', 'Prithvi', 'sprithvi@gmail.com', '9739550101', NULL, 'sprithvi', '12345', NULL, ''),
-(12, 'Anurag', 'Patil', 'anup@gmail.com', '9743879428', NULL, 'anup003', '12345', NULL, ''),
-(11, 'Kenneth', 'Oswin', 'kenosw@gmail.com', '3472893457', NULL, 'ko', '12345', NULL, ''),
-(9, 'Ezekiel', 'David', 'ezewdavid@gmail.com', '7483985955', NULL, 'eze', 'eze12345', NULL, '');
+(16, 'Suman', 'Thapa', 'thapa@gmail.com', '9881054210', NULL, 'sthapa', 'sthapa', NULL, ''),
+(14, 'Ram', 'Bhandari', 'ram@gmail.com', '9841545412', NULL, 'ram', 'ram', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -158,25 +139,21 @@ INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `email`, `phon
 -- Table structure for table `enquiries`
 --
 
-DROP TABLE IF EXISTS `enquiries`;
-CREATE TABLE IF NOT EXISTS `enquiries` (
-  `enquiry_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `enquiries` (
+  `enquiry_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact` varchar(20) NOT NULL,
-  `enquiry_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`enquiry_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `enquiry_date` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `enquiries`
 --
 
 INSERT INTO `enquiries` (`enquiry_id`, `name`, `email`, `contact`, `enquiry_date`) VALUES
-(1, 'Abhishek', 'abhis@gmail.com', '9873425353', '2024-02-27 04:03:43'),
-(14, 'Sanjay', 'sanjay@gmail.com', '9933321354', '2024-03-17 14:52:59'),
-(3, 'Sheldon', 'sheldoncoop@gmail.com', '1231231234', '2024-03-17 13:31:01'),
-(15, 'Abhyu', 'abhyudith@gmail.com', '97634454533', '2024-03-25 05:29:16');
+(1, 'Abhishek', 'abhis@gmail.com', '9873425353', '2024-02-26 22:18:43'),
+(3, 'Sheldon', 'sheldoncoop@gmail.com', '1231231234', '2024-03-17 07:46:01');
 
 -- --------------------------------------------------------
 
@@ -184,11 +161,9 @@ INSERT INTO `enquiries` (`enquiry_id`, `name`, `email`, `contact`, `enquiry_date
 -- Table structure for table `hotel`
 --
 
-DROP TABLE IF EXISTS `hotel`;
-CREATE TABLE IF NOT EXISTS `hotel` (
-  `building_id` int NOT NULL AUTO_INCREMENT,
-  `building_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`building_id`)
+CREATE TABLE `hotel` (
+  `building_id` int(11) NOT NULL,
+  `building_name` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -197,19 +172,15 @@ CREATE TABLE IF NOT EXISTS `hotel` (
 -- Table structure for table `maintenance_payment`
 --
 
-DROP TABLE IF EXISTS `maintenance_payment`;
-CREATE TABLE IF NOT EXISTS `maintenance_payment` (
-  `payment_id` int NOT NULL AUTO_INCREMENT,
-  `tenant_id` int DEFAULT NULL,
+CREATE TABLE `maintenance_payment` (
+  `payment_id` int(11) NOT NULL,
+  `tenant_id` int(11) DEFAULT NULL,
   `amount_paid` decimal(10,2) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `service_id` int DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
   `service_name` varchar(255) NOT NULL,
-  `fee_amount` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`payment_id`),
-  KEY `tenant_id` (`tenant_id`),
-  KEY `service_id` (`service_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fee_amount` decimal(10,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `maintenance_payment`
@@ -238,20 +209,16 @@ INSERT INTO `maintenance_payment` (`payment_id`, `tenant_id`, `amount_paid`, `pa
 -- Table structure for table `owner`
 --
 
-DROP TABLE IF EXISTS `owner`;
-CREATE TABLE IF NOT EXISTS `owner` (
-  `owner_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `owner` (
+  `owner_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `admin_id` int DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  PRIMARY KEY (`owner_id`),
-  UNIQUE KEY `username` (`username`),
-  KEY `admin_id` (`admin_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `password` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `owner`
@@ -267,13 +234,11 @@ INSERT INTO `owner` (`owner_id`, `first_name`, `last_name`, `email`, `phone_numb
 -- Table structure for table `parking`
 --
 
-DROP TABLE IF EXISTS `parking`;
-CREATE TABLE IF NOT EXISTS `parking` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int NOT NULL,
-  `parking_slot` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `parking` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `parking_slot` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `parking`
@@ -301,15 +266,12 @@ INSERT INTO `parking` (`id`, `employee_id`, `parking_slot`) VALUES
 -- Table structure for table `parking_slot`
 --
 
-DROP TABLE IF EXISTS `parking_slot`;
-CREATE TABLE IF NOT EXISTS `parking_slot` (
-  `parking_slot_id` int NOT NULL AUTO_INCREMENT,
-  `slot_number` int NOT NULL,
-  `owner_id` int DEFAULT NULL,
-  `employee_id` int DEFAULT NULL,
-  PRIMARY KEY (`parking_slot_id`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `parking_slot` (
+  `parking_slot_id` int(11) NOT NULL,
+  `slot_number` int(11) NOT NULL,
+  `owner_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `parking_slot`
@@ -329,16 +291,13 @@ INSERT INTO `parking_slot` (`parking_slot_id`, `slot_number`, `owner_id`, `emplo
 -- Table structure for table `room`
 --
 
-DROP TABLE IF EXISTS `room`;
-CREATE TABLE IF NOT EXISTS `room` (
-  `room_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `room` (
+  `room_id` int(11) NOT NULL,
   `building_name` varchar(255) NOT NULL,
-  `unit_number` int NOT NULL,
-  `owner_id` int DEFAULT NULL,
-  `total_flats` int DEFAULT NULL,
-  PRIMARY KEY (`room_id`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `unit_number` int(11) NOT NULL,
+  `owner_id` int(11) DEFAULT NULL,
+  `total_flats` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room`
@@ -355,15 +314,13 @@ INSERT INTO `room` (`room_id`, `building_name`, `unit_number`, `owner_id`, `tota
 -- Table structure for table `salary_requests`
 --
 
-DROP TABLE IF EXISTS `salary_requests`;
-CREATE TABLE IF NOT EXISTS `salary_requests` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
+CREATE TABLE `salary_requests` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL,
   `current_salary` decimal(10,2) DEFAULT NULL,
   `requested_increment` decimal(10,2) DEFAULT NULL,
-  `reason` text,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `reason` text DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salary_requests`
@@ -402,13 +359,11 @@ INSERT INTO `salary_requests` (`id`, `employee_id`, `current_salary`, `requested
 -- Table structure for table `services`
 --
 
-DROP TABLE IF EXISTS `services`;
-CREATE TABLE IF NOT EXISTS `services` (
-  `service_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `services` (
+  `service_id` int(11) NOT NULL,
   `service_name` varchar(255) NOT NULL,
-  `fee_amount` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`service_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fee_amount` decimal(10,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `services`
@@ -427,17 +382,13 @@ INSERT INTO `services` (`service_id`, `service_name`, `fee_amount`) VALUES
 -- Table structure for table `service_requests`
 --
 
-DROP TABLE IF EXISTS `service_requests`;
-CREATE TABLE IF NOT EXISTS `service_requests` (
-  `request_id` int NOT NULL AUTO_INCREMENT,
-  `tenant_id` int DEFAULT NULL,
-  `service_id` int DEFAULT NULL,
+CREATE TABLE `service_requests` (
+  `request_id` int(11) NOT NULL,
+  `tenant_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
   `requested_time` datetime DEFAULT NULL,
-  `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`request_id`),
-  KEY `tenant_id` (`tenant_id`),
-  KEY `service_id` (`service_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service_requests`
@@ -461,21 +412,18 @@ INSERT INTO `service_requests` (`request_id`, `tenant_id`, `service_id`, `reques
 -- Table structure for table `tenant`
 --
 
-DROP TABLE IF EXISTS `tenant`;
-CREATE TABLE IF NOT EXISTS `tenant` (
-  `tenant_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tenant` (
+  `tenant_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `age` int NOT NULL,
+  `age` int(11) NOT NULL,
   `dob` date NOT NULL,
-  `owner_id` int DEFAULT NULL,
+  `owner_id` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`tenant_id`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `password` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tenant`
@@ -485,6 +433,222 @@ INSERT INTO `tenant` (`tenant_id`, `first_name`, `last_name`, `email`, `phone_nu
 (17, 'Ankit', 'Raj', 'rajankit1364@gmail.com', '3787583754', 20, '2003-11-29', 5, '', ''),
 (15, 'Vijay', 'Kumar', 'lucky123@gmail.com', '9873632347', 10, '2014-07-16', 5, '', ''),
 (16, 'Murali', 'Bharadhwaj', 'sandhyaprithvi@gmail.com', '9972611000', 47, '1975-10-29', 10, '', '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `apartment`
+--
+ALTER TABLE `apartment`
+  ADD PRIMARY KEY (`apartment_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Indexes for table `complaint`
+--
+ALTER TABLE `complaint`
+  ADD PRIMARY KEY (`complaint_id`),
+  ADD KEY `tenant_id` (`tenant_id`),
+  ADD KEY `owner_id` (`owner_id`),
+  ADD KEY `employee_id` (`employee_id`);
+
+--
+-- Indexes for table `complaints`
+--
+ALTER TABLE `complaints`
+  ADD PRIMARY KEY (`complaint_id`),
+  ADD KEY `tenant_id` (`tenant_id`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`employee_id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Indexes for table `enquiries`
+--
+ALTER TABLE `enquiries`
+  ADD PRIMARY KEY (`enquiry_id`);
+
+--
+-- Indexes for table `hotel`
+--
+ALTER TABLE `hotel`
+  ADD PRIMARY KEY (`building_id`);
+
+--
+-- Indexes for table `maintenance_payment`
+--
+ALTER TABLE `maintenance_payment`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `tenant_id` (`tenant_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Indexes for table `owner`
+--
+ALTER TABLE `owner`
+  ADD PRIMARY KEY (`owner_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `admin_id` (`admin_id`);
+
+--
+-- Indexes for table `parking`
+--
+ALTER TABLE `parking`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parking_slot`
+--
+ALTER TABLE `parking_slot`
+  ADD PRIMARY KEY (`parking_slot_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Indexes for table `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`room_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Indexes for table `salary_requests`
+--
+ALTER TABLE `salary_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`service_id`);
+
+--
+-- Indexes for table `service_requests`
+--
+ALTER TABLE `service_requests`
+  ADD PRIMARY KEY (`request_id`),
+  ADD KEY `tenant_id` (`tenant_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Indexes for table `tenant`
+--
+ALTER TABLE `tenant`
+  ADD PRIMARY KEY (`tenant_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `apartment`
+--
+ALTER TABLE `apartment`
+  MODIFY `apartment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `complaint`
+--
+ALTER TABLE `complaint`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `complaints`
+--
+ALTER TABLE `complaints`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `enquiries`
+--
+ALTER TABLE `enquiries`
+  MODIFY `enquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `hotel`
+--
+ALTER TABLE `hotel`
+  MODIFY `building_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `maintenance_payment`
+--
+ALTER TABLE `maintenance_payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `owner`
+--
+ALTER TABLE `owner`
+  MODIFY `owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `parking`
+--
+ALTER TABLE `parking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `parking_slot`
+--
+ALTER TABLE `parking_slot`
+  MODIFY `parking_slot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `room`
+--
+ALTER TABLE `room`
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `salary_requests`
+--
+ALTER TABLE `salary_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `service_requests`
+--
+ALTER TABLE `service_requests`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tenant`
+--
+ALTER TABLE `tenant`
+  MODIFY `tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
