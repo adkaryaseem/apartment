@@ -1,17 +1,10 @@
 <?php
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
+
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 // Fetch fees details from the database
 $query = "SELECT CONCAT(t.first_name, ' ', t.last_name) AS tenant_name, mp.amount_paid, mp.payment_date, s.service_name

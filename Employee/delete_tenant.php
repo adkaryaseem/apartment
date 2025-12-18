@@ -1,16 +1,9 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 if (isset($_GET['tenant_id']) && !empty($_GET['tenant_id'])) {
     $tenant_id = $_GET['tenant_id'];

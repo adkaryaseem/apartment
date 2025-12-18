@@ -7,18 +7,11 @@ require '../PHPMailer-master/src/PHPMailer.php';
 require '../PHPMailer-master/src/SMTP.php';
 
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = ""; // Replace with your actual password
-$database = "apartment_management";
+include ('../config.php');
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = connect();
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Get tenant email from URL parameters
 $tenant_email = $_GET['tenant_email'];

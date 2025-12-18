@@ -3,15 +3,10 @@
 <head>
     <link rel="shortcut icon" href="../images/logo_1_criwwp.png" type="image/x-icon">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="../Employee/style copy.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .sidenav li{
-            cursor: pointer;
-        }
-        .bell i{
-            cursor:pointer;
-        }
         .slideshow {
             position: relative;
             overflow: hidden;
@@ -40,7 +35,7 @@
 <body>
 
 <div class="sidebar">
-    <img src="../images/logo_1_criwwp-removebg-preview.png" class="logo">
+    <img src="../images/logo for rental home.png" class="logo">
     <i class="fa fa-chevron-left menu-icon"></i>
     <ul class="sidenav">
         <li class="active"><i class="fa fa-home"></i><a href=""> Dashboard
@@ -85,42 +80,48 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="slideshow">
-        <div class="image__container active">
+    <div class="owl-carousel owl-theme">
+        <div class="item">
             <img src="../images/1.jpg" alt="Indoor">        
         </div>
+        <div class="item">
+            <img src="../images/1.jpg" alt="Indoor">        
+        </div>
+        <div class="item">
+            <img src="../images/1.jpg" alt="Indoor">        
+        </div>
+    </div>
+    <!-- <div class="slideshow">
+            <div class="image__container active">
+                </div>
         <div class="image__container">
             <img src="../images/2.jpg" alt="Indoor">        
         </div>
         <div class="image__container">
             <img src="../images/3.jpg" alt="Indoor">        
         </div>
-    </div>
+    </div> -->
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-QAc08ipPd7ElgrEsKMj9mFi1LOYhEBBeusKfVSXktZSjlm5BIThey5q7IEYtZVixxC+lIN6CnSZCfI4s00Dq3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        const slides = document.querySelectorAll('.image__container');
-
-        // Hide all images
-        slides.forEach(slide => {
-            slide.classList.remove('active');
-        });
-
-        // Show current image
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1;
+    $('.owl-carousel').owlCarousel({
+    rtl:true,
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
         }
-        slides[slideIndex - 1].classList.add('active');
-
-        // Repeat after 3 sec (3000ms)
-        setTimeout(showSlides, 3000);
     }
+})
 </script>
 
 <script type="text/javascript">

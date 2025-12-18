@@ -7,18 +7,10 @@ require '../PHPMailer-master/src/PHPMailer.php';
 require '../PHPMailer-master/src/SMTP.php';
 
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = ""; // Replace with your actual password
-$database = "apartment_management";
+include ('../config.php');
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 // Get request ID, service name, and tenant email from URL parameters
 $request_id = $_GET['request_id'];

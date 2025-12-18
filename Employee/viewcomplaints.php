@@ -57,18 +57,11 @@
     <div class="container">
         <?php
         // Database connection parameters
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "apartment_management";
+        include ('../config.php');
 
+        
         // Create connection
-        $conn = new mysqli($servername, $username, $password, $database);
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $conn = connect();
 
         // Query to retrieve all complaints
         $query = "SELECT c.complaint_id, c.description, t.first_name AS tenant_first_name, t.last_name AS tenant_last_name, o.first_name AS owner_first_name, o.last_name AS owner_last_name, e.first_name AS employee_first_name, e.last_name AS employee_last_name

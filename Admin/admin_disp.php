@@ -2,9 +2,7 @@
 include ('../config.php');
 
 $conn = connect();
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);

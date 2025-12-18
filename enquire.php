@@ -1,14 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 $success_message = "";
 
@@ -313,9 +306,8 @@ body, button, input {
                             </div>
                             <div class="app-form-group buttons">
     <input type="submit" class="app-form-button" value="Submit Enquiry">
-    <a href="../apartmentmodified" class="app-form-button">Return Home</a>
-</div>
-
+    <a href="../index.html" class="app-form-button">Return Home</a>
+                            </div>
                         </form>
                     </div>
                 </div>

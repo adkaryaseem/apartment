@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 :root{
-	--darkblue:#2b2c40;
+	--darkblue:#001f3e;
 	--lightblue:#2b2c40;
 	--blue:#696cff;
 	--nbox:#323249;
-	--black:#232333;
+	--black:#072542;
 	--font-color:#a3a4cc;
 	--font-light:#cbcbe2;
 	--white:#fff;
@@ -19,7 +19,7 @@ body{background: var(--black); height: 100vh; overflow: hidden;}
 box-shadow: var(--shadow);}
 .main{max-width: 100%; width: 79.1%; float: left; padding: 25px;}
 .logo span{font-size: 20px; color: var(--font-light); font-weight: normal;}
-.logo{color: var(--blue); font-weight: bold;font-size: 20px;}
+.logo{color: var(--blue); font-weight: bold;font-size: 20px; width:205px; height: 110px;}
 .menu-icon{background: var(--blue);
     border-radius: 21px;
     height: 25px;
@@ -33,8 +33,8 @@ box-shadow: var(--shadow);}
     top: 20px;
     border: 5px solid #232333;}
 .sidenav{margin-top: 20px;}
-.sidenav li{list-style: none;padding: 12px 10px;border-radius: 10px;margin-bottom: 10px;
-	font-size: 14px;}
+.sidenav li{list-style: none;padding: 12px 10px;border-radius: 10px; margin-bottom: 10px;
+	font-size: 14px; cursor: pointer;}
 	.app{
 		margin: 5px;
     padding-top: 10px;
@@ -52,7 +52,7 @@ box-shadow: var(--shadow);}
 		left: -50px;
     	top: 17px;
 	}
-.sidenav li:hover{background-color: rgba(124,125,182,.06);}
+.sidenav li:hover{background-color: rgba(151, 151, 180, 0.06);}
 .sidenav li i{color: var(--font-color); padding-right: 7px; }
 .sidenav li a{text-decoration: none; color: var(--font-color);}
 .active{ background:var(--blue)!important; position: relative; }

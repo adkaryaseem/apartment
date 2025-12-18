@@ -1,14 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 $employee_query = "SELECT * FROM employee";
 $employee_result = $conn->query($employee_query);

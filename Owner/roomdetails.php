@@ -1,17 +1,8 @@
 <?php
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 // Query to get the total number of flats
 $query_total_flats = "SELECT SUM(total_flats) AS total_flats FROM room";

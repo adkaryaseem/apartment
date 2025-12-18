@@ -1,17 +1,8 @@
 <?php
 // Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = ""; // Replace with your actual password
-$database = "apartment_management";
+include ('../config.php');
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 $request_query = "SELECT service_requests.request_id, CONCAT(tenant.first_name, ' ', tenant.last_name) AS tenant_name, 
                    tenant.email AS tenant_email, services.service_name, DATE_FORMAT(service_requests.requested_time, '%Y-%m-%d %H:%i:%s') AS requested_time

@@ -2,30 +2,23 @@
 // Start the session
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "apartment_management";
+include ('../config.php');
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT owner_id FROM owner WHERE username = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT employee_id FROM employee WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $_SESSION["owner_id"] = $row["owner_id"]; // Set owner_id in session
-        header("Location: empdashboard.php");
+        $_SESSION["employee_id"] = $row["employee_id"]; // Set owner_id in session
+        header("Location: ./empdashboard.php");
         exit();
     } else {
         $errorMessage = "Invalid username or password";
@@ -381,7 +374,7 @@ img {
             <div class="login__content">
                 <img class="login__img" src="../images/logo_1_criwwp-removebg-preview.png" alt="Login image" />
 
-                <form id="loginForm" method="POST" class="login__form">
+                <form id="loginForm" method="GET" class="login__form">
                     <div>
                         <h1 class="login__title">
                             <span>Welcome</span> Back

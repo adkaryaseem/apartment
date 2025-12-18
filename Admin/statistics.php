@@ -1,16 +1,8 @@
 <?php
 // Connect to your database (replace placeholders with your actual connection details)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "apartment_management";
+include ('../config.php');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connect();
 
 // Prepare and execute a query to fetch statistics (replace with your actual query)
 $sql = "SELECT COUNT(*) AS total_employees FROM employees";

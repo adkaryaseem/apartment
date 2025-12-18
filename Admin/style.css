@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 :root{
-	--darkblue:#2b2c40;
+	--darkblue:#001f3e;
 	--lightblue:#2b2c40;
 	--blue:#696cff;
 	--nbox:#323249;
-	--black:#232333;
+	--black:#072542;
 	--font-color:#a3a4cc;
 	--font-light:#cbcbe2;
 	--white:#fff;
@@ -34,7 +34,7 @@ box-shadow: var(--shadow);}
     border: 5px solid #232333;}
 .sidenav{margin-top: 20px;}
 .sidenav li{list-style: none;padding: 12px 10px;border-radius: 10px;margin-bottom: 10px;
-	font-size: 14px;}
+	font-size: 14px;cursor: pointer;}
 	.app{
 		margin: 5px;
     padding-top: 10px;
