@@ -39,11 +39,11 @@ $conn->close();
 :root {
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(122, 75%, 57%);
-  --second-color: hsl(127, 64%, 47%);
+  --first-color: #210752ff;
+  --second-color: #2e0777ff;
   --title-color: hsl(122, 12%, 12%);
   --text-color: hsl(122, 4%, 36%);
-  --body-color: hsl(128, 97%, 85%);
+  --body-color: #17043bff;
 
 
   /*========== Font and typography ==========*/
@@ -367,12 +367,12 @@ img {
     <div class="container">
         <div class="login">
             <div class="login__content">
-                <img class="login__img" src="../images/logo_1_criwwp.png" alt="Login image" />
+                <img class="login__img" src="../images/logo-no-bg.png" alt="Login image" />
 
                 <form id="loginForm" method="POST" class="login__form">
                     <div>
                         <h1 class="login__title">
-                            <span>Welcome</span> Back
+                            <span>Welcome</span> Back Admin
                         </h1>
 
                         <p class="login__description">

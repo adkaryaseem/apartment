@@ -128,8 +128,8 @@ body {
         $conn->close();
         ?>
         <br>
-        <a href="../admin/admin_dashboard.php" class="back-button">Return Home</a>
-        <a href="../owner/createemployee.php" class="create-employee-button">Create Employee</a>
+        <a href="owner_dashboard.php" class="back-button">Return Home</a>
+        <a href="createemployee.php" class="create-employee-button">Create Employee</a>
     </div>
 </body>
 </html>

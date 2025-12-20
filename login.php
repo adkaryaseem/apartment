@@ -88,6 +88,8 @@ img {
 .login__content {
   position: relative;
   height: 600px;
+  left: 20%;
+  top: 50%;
   align-items: center;
 }
 
@@ -102,6 +104,7 @@ img {
 .login__form {
   position: relative;
   width:470;
+  height: 480px;
   background-color: hsla(244, 16%, 92%, 0.6);
   border: 2px solid hsla(244, 16%, 92%, 0.75);
   margin-inline: 1.5rem;
@@ -380,7 +383,6 @@ img {
             </form>
         </div>
     </div>
-</div>
 
 
 <script>

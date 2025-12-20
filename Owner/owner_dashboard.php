@@ -27,6 +27,7 @@
         .heading{
             /* display:flex; */
             flex-direction:column;
+            margin: 2px 50px 5px 10px;
         }
         .logo{
             /* display:flex; */
@@ -39,7 +40,7 @@
             height:7rem;
         }
         h2, h3 {
-            margin:none
+            margin:none;
             text-align: center;
             color: #868686ff;
         }
@@ -63,10 +64,14 @@
         a:hover {
             background-color: #0056b3;
         }
+        .logout{
+            display: flex;
+            flex-direction: column;
+        }
         .logout-btn {
-            position: absolute;
-            top: 70px;
-            right: 290px;
+            /* position: relative; */
+            /* top: 70px;*/
+            /* right: 290px;  */
             background-color: #f00a21ff;
             color: #fff;
             padding: 10px 25px;
@@ -107,16 +112,18 @@
                 <h2>Welcome, Owner!</h2>
                 <h3>Please select an option:</h3>
             </div>
+            <div class="logout">
+                <a href="../index.php" class="logout-btn">Logout</a>
+            </div>
         </div>
         <ul>
             <li><a href="viewempl.php">View Employees</a></li>
-            <li><a href="complaintcount.php">Count Statistics</a></li>
+            <li><a href="complaintcount.php">Count Total Complaints</a></li>
             <li><a href="createemployee.php">Create Employee</a></li>
             <li><a href="roomdetails.php">Display Details of Rooms</a></li>
             <li><a href="feesrecieved.php">Display Details of Fee Payment's</a></li>
         </ul>
         <button class="export-btn" onclick="exportToCSV()">Export to CSV</button>
-        <a href="../index.html" class="logout-btn">Logout</a>
     </div>
 
     <script>

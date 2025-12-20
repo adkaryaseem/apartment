@@ -7,16 +7,16 @@
   <link rel="shortcut icon" href="./images/logo-no-bg.png" type="image/x-icon">
    <style>
     :root {
-  --color-primary: #5ec576;
+  --color-primary: #460db1ff;
   --color-secondary: #ffcb03;
   --color-tertiary: #ff585f;
-  --color-primary-darker: #4bbb7d;
+  --color-primary-darker: #590ce7ff;
   --color-secondary-darker: #ffbb00;
   --color-tertiary-darker: #fd424b;
   --color-primary-opacity: #5ec5763a;
   --color-secondary-opacity: #ffcd0331;
   --color-tertiary-opacity: #ff58602d;
-  --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+  --gradient-primary: linear-gradient(to top left, #2b1c46ff, #65508bff);
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
   --gradient-cancellation: linear-gradient(to top left, #e52a5a, #ff585f);
   --white: #ffffff;
@@ -138,16 +138,17 @@ img {
   height: 9rem;
   width: 100%;
   padding: 0 6rem;
+  background-color: #1b0a3aff;
   z-index: 100;
   flex-direction: row;
+  position: fixed;
+  margin-top: 5px 10px 2px 10px ;
 }
 
 /* nav and stickly class at the same time */
-.nav.sticky {
-  position: fixed;
+/* .nav.sticky {
   background-color: rgba(255, 255, 255, 0.95);
-  margin-top: 0;
-}
+} */
 
 .nav__logo {
   height: 4.5rem;
@@ -163,6 +164,7 @@ img {
   align-items: center;
   list-style: none;
   gap: 2rem;
+  color: whitesmoke;
 }
 
 .nav__link:link,
@@ -230,6 +232,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: #22123fff; */
 }
 
 .header__title {
@@ -691,7 +694,7 @@ h4 {
         </li>
          
         <li class="nav__item">
-          <a class="nav__link nav__link--btn btn--show-modal" href="login.html">Login</a>
+          <a class="nav__link nav__link--btn btn--show-modal" href="login.php">Login</a>
         </li>
       </ul>
       <img class="hamburger" src="img/hamburger.png" alt="" />
@@ -837,7 +840,7 @@ h4 {
     <button class="btn btn--show-modal" onclick="window.location.href='enquire.php'">Enquire Now</button>
   </section>
   <footer class="footer">
-    <img src="images/logo for rental home.png" alt="Logo" class="footer__logo" />
+    <img src="images/logo-no-bg.png" alt="Logo" class="footer__logo" />
     <p class="footer__copyright">
       &copy; 
       Rent Your Home</a>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
   <title>Parking Slots</title>
   <style>
     body {
@@ -56,14 +57,14 @@
     }
     .popup button {
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color: #450470ff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     .popup button.cancel {
-      background-color: #ccc;
+      background-color: #f30909ff;
       margin-left: 10px;
     }
   </style>
@@ -112,7 +113,7 @@
       <h3>Select Employee:</h3>
       <select id="employeeId" name="employeeId"></select>
       <button type="submit">Allot Slot</button>
-      <button class="cancel" onclick="closePopup()">Cancel</button>
+      <button class="cancel" onclick="cancle()">Cancel</button>
     </form>
   </div>
 
@@ -125,7 +126,7 @@
       populateEmployees(); // Populate employee dropdown when popup is opened
     }
 
-    function closePopup() {
+    function cancle() {
       var popup = document.getElementById('allotPopup');
       popup.style.display = 'none';
     }

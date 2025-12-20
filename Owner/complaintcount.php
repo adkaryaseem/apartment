@@ -59,11 +59,13 @@ $conn->close();
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
+            flex-direction: column;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -102,13 +104,13 @@ $conn->close();
             background-color: #45a049;
         }
         .back-button {
-            display: inline-block;
+            display: block;
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            margin-right: 20px;
+            margin:10px 20px;
         }
 
         .back-button:hover {
@@ -132,6 +134,8 @@ $conn->close();
             <button type="submit">View Details</button>
         </form>
     </div>
-    <a href="owner_dashboard.php" class="back-button">Return Home</a>
+    <div>
+        <a href="owner_dashboard.php" class="back-button">Return Home</a>
+    </div>
 </body>
 </html>

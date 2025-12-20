@@ -90,7 +90,7 @@ body, button, input {
   margin-right: auto;
 }
 
-.screen-header-button {
+screen-header-button {
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -306,7 +306,7 @@ body, button, input {
                             </div>
                             <div class="app-form-group buttons">
     <input type="submit" class="app-form-button" value="Submit Enquiry">
-    <a href="../index.html" class="app-form-button">Return Home</a>
+    <a href="../index.php" class="app-form-button">Return Home</a>
                             </div>
                         </form>
                     </div>
