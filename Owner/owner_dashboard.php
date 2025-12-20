@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <title>Owner Dashboard</title>
     <style>
         body {
@@ -15,13 +16,32 @@
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #1b0a3aff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .top{
+            display:flex;
+            flex-direction:row;
+        }
+        .heading{
+            /* display:flex; */
+            flex-direction:column;
+        }
+        .logo{
+            /* display:flex; */
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+        }
+        .logo img{
+            margin:2px 50px 5px 15px;
+            height:7rem;
+        }
         h2, h3 {
+            margin:none
             text-align: center;
-            color: #333;
+            color: #868686ff;
         }
         ul {
             list-style-type: none;
@@ -46,8 +66,8 @@
         .logout-btn {
             position: absolute;
             top: 70px;
-            right: 270px;
-            background-color: #dc3545;
+            right: 290px;
+            background-color: #f00a21ff;
             color: #fff;
             padding: 10px 25px;
             border: none;
@@ -56,28 +76,38 @@
             transition: background-color 0.3s ease;
         }
         .logout-btn:hover {
-            background-color: #c82333;
+            background-color: #470f15ff;
         }
         .export-btn {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #28a745;
+            background-color: #04310fff;
             color: #fff;
             border: none;
+            font-size:15px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.5s ease-in-out 0.5s;
         }
         .export-btn:hover {
-            background-color: #218838;
+            background-color: #0ee23cff;
+            color:black;
+            transform:scale(1.1,1.1)
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Welcome, Owner!</h2>
-        <h3>Please select an option:</h3>
+        <div class="top">
+            <div class="logo">
+                <img src="../images/logo-no-bg.png" alt="logo">
+            </div>
+            <div class="heading">
+                <h2>Welcome, Owner!</h2>
+                <h3>Please select an option:</h3>
+            </div>
+        </div>
         <ul>
             <li><a href="viewempl.php">View Employees</a></li>
             <li><a href="complaintcount.php">Count Statistics</a></li>

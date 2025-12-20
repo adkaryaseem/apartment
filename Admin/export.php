@@ -4,23 +4,18 @@ include ('../config.php');
 $conn = connect();
 
 $owner_query = "SELECT COUNT(*) AS total_owners FROM owner";
-
 $owner_result = $conn->query($owner_query);
 
 $tenant_query = "SELECT COUNT(*) AS total_tenants FROM tenant";
-
 $tenant_result = $conn->query($tenant_query);
 
 $employee_query = "SELECT COUNT(*) AS total_employees FROM employee";
-
 $employee_result = $conn->query($employee_query);
 
 $parking_slot_query = "SELECT COUNT(*) AS total_slots FROM parking_slot";
-
 $parking_slot_result = $conn->query($parking_slot_query);
 
 $admin_query = "SELECT * FROM admin";
-
 $admin_result = $conn->query($admin_query);
 
 $csv_content = "Admin ID,Admin Username,Admin Email,Admin Phone Number,";

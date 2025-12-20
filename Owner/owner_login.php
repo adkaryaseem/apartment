@@ -35,7 +35,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Login</title>
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
+    <title>Owner Login</title>
     <style>
         /* CSS styles */
         body {
@@ -48,10 +49,20 @@ $conn->close();
         .container {
             max-width: 400px;
             margin: 50px auto;
-            background-color: #fff;
+            background-color: #0d1035ff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            color:white;
+        }
+        .logo{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .logo img{
+            height:7rem;
         }
 
         h2 {
@@ -98,7 +109,10 @@ $conn->close();
 </head>
 <body>
     <div class="container">
-        <h2>Manager Login</h2>
+        <div class="logo">
+            <img src="../images/logo-no-bg.png" alt="logo">
+        </div>
+        <h2>Owner Login</h2>
         <!-- Ensure the action attribute is empty to submit to the same page -->
         <form method="POST">
             <label for="username">Username:</label>

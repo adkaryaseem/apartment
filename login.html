@@ -9,6 +9,9 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="./assets/css/styles.css" />
+    <!-- ============BROWSE ICON -->
+        <link rel="shortcut icon" href="./images/logo-no-bg.png" type="image/x-icon">
+
     <style>
         /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
@@ -17,11 +20,11 @@
 :root {
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(122, 75%, 57%);
-  --second-color: hsl(127, 64%, 47%);
+  --first-color: #02315f;
+  --second-color: #033d77;
   --title-color: hsl(122, 12%, 12%);
-  --text-color: hsl(122, 4%, 36%);
-  --body-color: hsl(128, 97%, 85%);
+  --text-color: hsl(120, 1%, 23%);
+  --body-color: #001f3e;
 
 
   /*========== Font and typography ==========*/
@@ -84,7 +87,7 @@ img {
 
 .login__content {
   position: relative;
-  height: 100vh;
+  height: 600px;
   align-items: center;
 }
 
@@ -98,6 +101,7 @@ img {
 
 .login__form {
   position: relative;
+  width:470;
   background-color: hsla(244, 16%, 92%, 0.6);
   border: 2px solid hsla(244, 16%, 92%, 0.75);
   margin-inline: 1.5rem;
@@ -222,8 +226,11 @@ img {
   color: #fff;
   font-size: var(--small-font-size);
   font-weight: var(--font-semi-bold);
-  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
   margin-bottom: 1rem;
+  transition: box-shadow 0.5s ease-in-out;
+}
+.login__button:hover{
+  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
 }
 
 .login__button-ghost {
@@ -337,7 +344,7 @@ img {
   <body>
     <div class="login">
         <div class="login__content">
-            <img class="login__img" src="images\logo_1_criwwp.png" alt="Login image" />
+            <img class="login__img" src="./images/logo-no-bg.png" alt="Login image" />
 
             <form class="login__form">
                 <div>
@@ -357,7 +364,7 @@ img {
                             <select id="userType" class="login__input">
                                 <option value="">Select User Type</option>
                                 <option value="admin">Admin</option>
-                                <option value="tenant">Owner</option>
+                                <option value="owner">Owner</option>
                                 <option value="employee">Employee</option>
                                 <option value="tenant">Tenant</option>
                             </select>
@@ -386,6 +393,9 @@ img {
                 case "admin":
                     window.location.href = "admin/admin_login.php";
                     break;
+                case "owner":
+                      window.location.href = "owner/owner_login.php";
+                      break;
                 case "employee":
                     window.location.href = "employee/employeelogin.php";
                     break;
