@@ -1,5 +1,5 @@
 <?php
-include ('../config.php');
+include ('./config.php');
 
 $conn = connect();
 
@@ -29,6 +29,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enquiry Form</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700">
+    <link rel="shortcut icon" href="./images/logo-no-bg.png" type="image/x-icon">
     <style>
 *, *:before, *:after {
   box-sizing: border-box;
@@ -233,6 +234,17 @@ screen-header-button {
   height: 20px;
   margin: 0 5px;
 }
+#successAlert{
+        position: fixed;
+        top: 15rem;
+        left: 50rem;
+        background-color: #28a745;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        z-index: 9999;
+}
 
 @media screen and (max-width: 520px) {
   .screen-body {
@@ -290,10 +302,18 @@ screen-header-button {
                             <span>ENQUIRY</span>
                             <span>FORM</span>
                         </div>
-                        <!-- Success message -->
-                        <?php if (!empty($success_message)): ?>
-                            <div class="success-message"><?php echo $success_message; ?></div>
-                        <?php endif; ?>
+                              <!-- Success message -->                       
+                                <?php if (!empty($success_message)): ?>
+                                    <div id="successAlert">
+                                      <?php echo htmlspecialchars($success_message, ENT_QUOTES); ?> 
+                                      </div>
+                                      <script>
+                                          //alert("<?php echo $success_message; ?>");
+                                          setTimeout(function () {
+                                            document.getElementById("successAlert").remove();
+                                          }, 2000);
+                                      </script>
+                                  <?php endif; ?>
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <div class="app-form-group">
                                 <input type="text" class="app-form-control" id="name" name="name" placeholder="Name" required>
@@ -306,7 +326,7 @@ screen-header-button {
                             </div>
                             <div class="app-form-group buttons">
     <input type="submit" class="app-form-button" value="Submit Enquiry">
-    <a href="../index.php" class="app-form-button">Return Home</a>
+    <a href="./" class="app-form-button">Return Home</a>
                             </div>
                         </form>
                     </div>

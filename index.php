@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" href="./images/logo-no-bg.png" type="image/x-icon">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <style>
     :root {
-  --color-primary: #460db1ff;
+  --color-primary: #001f3e;
   --color-secondary: #ffcb03;
   --color-tertiary: #ff585f;
-  --color-primary-darker: #590ce7ff;
+  --color-primary-darker: #001427ff;
   --color-secondary-darker: #ffbb00;
   --color-tertiary-darker: #fd424b;
   --color-primary-opacity: #5ec5763a;
-  --color-secondary-opacity: #ffcd0331;
+  --color-secondary-opacity: #e6b907a6;
   --color-tertiary-opacity: #ff58602d;
   --gradient-primary: linear-gradient(to top left, #2b1c46ff, #65508bff);
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
@@ -37,9 +38,9 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
-  color: #444;
+  color: #e2e0e0ff;
   line-height: 1.9;
-  background-color: #f3f3f3;
+  background-color: #1c2f42ff;
 }
 
 /* GENERAL ELEMENTS */
@@ -48,8 +49,7 @@ body {
   border-top: 1px solid #ddd;
 
   transition:
-    transform 1s,
-    opacity 1s;
+    transform 1s opacity 1s;
 }
 
 .section--hidden {
@@ -66,7 +66,7 @@ body {
   font-size: 1.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--white);
   margin-bottom: 1rem;
 }
 
@@ -87,7 +87,7 @@ body {
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s;
-  color: var(--black);
+  color: var(--white);
 }
 
 .btn:hover {
@@ -114,7 +114,7 @@ body {
 }
 
 p {
-  color: #666;
+  color: #e2e0e0;
 }
 
 /* This is BAD for accessibility! Don't do in the real world! */
@@ -138,20 +138,20 @@ img {
   height: 9rem;
   width: 100%;
   padding: 0 6rem;
-  background-color: #1b0a3aff;
+  background-color: #001f3e;
   z-index: 100;
   flex-direction: row;
   position: fixed;
   margin-top: 5px 10px 2px 10px ;
 }
 
-/* nav and stickly class at the same time */
-/* .nav.sticky {
+/* nav and stickly class at the same time
+.nav.sticky {
   background-color: rgba(255, 255, 255, 0.95);
 } */
 
 .nav__logo {
-  height: 4.5rem;
+  height: 7rem;
   transition: all 0.3s;
 }
 
@@ -177,19 +177,19 @@ img {
   transition: all 0.3s;
 }
 
-.nav__link--btn:link,
-.nav__link--btn:visited {
+.nav__link:link,
+.nav__link:visited {
   padding: 0.8rem 2.5rem;
   border-radius: 2rem;
   background-color: var(--color-primary);
-  color: #222;
+  color: #f7f4f4ff;
 }
 
-.nav__link--btn:hover,
+.nav__link:hover,
 .nav__link--btn:active {
   color: inherit;
   background-color: var(--color-primary-darker);
-  color: var(--black);
+  /* color: var(--black); */
 }
 
 form {
@@ -228,15 +228,15 @@ form {
 /* HEADER */
 .header {
   padding: 0 3rem;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #22123fff; */
 }
 
 .header__title {
   max-width: 115rem;
+  height: max-content;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 10%;
@@ -246,8 +246,15 @@ form {
 
 .header-content {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row;
+  color: var(--white);
+  gap: 20rem;
+}
+.header-article{
+  width: 55rem;
+}
+.header-image img{
+  height: 30rem;
 }
 
 h1 {
@@ -394,6 +401,7 @@ h4 {
   font-size: 2.25rem;
   font-weight: 500;
   align-self: center;
+  color: var(--black);
 }
 
 .operations__icon {
@@ -412,9 +420,11 @@ h4 {
 
 .operations__content p {
   grid-column: 2;
+  color: var(--black);
 }
 
 .operations__icon--1 {
+  color: var(--black);
   background-color: var(--color-secondary-opacity);
 }
 .operations__icon--2 {
@@ -422,15 +432,6 @@ h4 {
 }
 .operations__icon--3 {
   background-color: var(--color-tertiary-opacity);
-}
-.operations__icon--1 svg {
-  fill: var(--color-secondary-darker);
-}
-.operations__icon--2 svg {
-  fill: var(--color-primary);
-}
-.operations__icon--3 svg {
-  fill: var(--color-tertiary);
 }
 
 /* SLIDER */
@@ -599,7 +600,7 @@ h4 {
 /* FOOTER */
 .footer {
   padding: 10rem 3rem;
-  background-color: #37383d;
+  background-color: var(--color-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -617,14 +618,14 @@ h4 {
 }
 
 .footer__logo {
-  height: 10rem;
+  height: 15rem;
   display: block;
   margin: 0 auto;
   margin-bottom: 0.5rem;
 }
 
 .footer__copyright{
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #aaa;
   text-align: center;
 }
@@ -653,6 +654,8 @@ h4 {
 .contact-section {
   padding: 20px; /* Add padding for spacing */
   border-radius: 10px; /* Add rounded corners for a softer look */
+  /* background-color: var(--color-primary);
+  height: 30rem; */
 }
 
 .contact-section h1 {
@@ -683,8 +686,8 @@ h4 {
 
 <body>
   <header class="header">
-    <nav class="nav">
-      <img src="images/logo for rental home.png" alt="Bankist logo" class="nav__logo" id="logo" />
+    <nav class="nav sticky">
+      <img src="./images/logo-no-bg.png" alt="Bankist logo" class="nav__logo" id="logo" />
       <ul class="nav__links">
         <li class="nav__item">
           <a class="nav__link" href="#section--1">Features</a>
@@ -702,6 +705,7 @@ h4 {
 
     <div class="header__title">
       <section class="header-content">
+        <div class="header-article">
         <h1>
           When
           <!-- Green highlight effect -->
@@ -710,7 +714,10 @@ h4 {
           <span class="highlight">Luxury</span>
         </h1>
         <h4>A simpler Living experience for a Comfortable life.</h4>
-       
+       </div>
+       <div class="header-image">
+        <img src="./images/logo-no-bg.png" alt="Heading Image Logo">
+       </div>
       </section>
     </div>
   </header>
@@ -728,9 +735,7 @@ h4 {
         <img src="images\Untitled.jpg" data-src="img/digital.jpg" alt="Computer" class="images\Untitled.jpg" />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-monitor"></use>
-            </svg>
+             <i class="fa-solid fa-tv"></i>
           </div>
           <h5 class="features__header">100% Secure</h5>
           <p>
@@ -741,9 +746,7 @@ h4 {
       <section class="feature-two">
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="images\spool.jpg"></use>
-            </svg>
+            <i class="fa-solid fa-person-swimming"></i>
           </div>
           <h5 class="features__header">Swimming Pool</h5>
           <p>
@@ -756,9 +759,7 @@ h4 {
         <img src="images\parking.jpg" data-src="images\parking.jpg" alt="Credit card" class="images\parking.jpg" />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="images\parking.jpg"></use>
-            </svg>
+           <i class="fa-solid fa-car"></i>
           </div>
           <h5 class="features__header">Parking</h5>
           <p>
@@ -790,9 +791,7 @@ h4 {
       </section>
       <div class="operations__content operations__content--1 operations__content--active">
         <div class="operations__icon operations__icon--1">
-          <svg>
-            <use xlink:href="img/icons.svg#icon-upload"></use>
-          </svg>
+          <i class="fa-solid fa-eye"></i>
         </div>
         <h5 class="operations__header">
             Our Vision
@@ -805,18 +804,14 @@ h4 {
 
       <div class="operations__content operations__content--2">
         <div class="operations__icon operations__icon--2">
-          <svg>
-            <use xlink:href="img/icons.svg#icon-home"></use>
-          </svg>
+          <i class="fa-solid fa-house"></i>
         </div>
         <h5 class="operations__header">
         </h5>
       </div>
       <div class="operations__content operations__content--3">
         <div class="operations__icon operations__icon--3">
-          <svg>
-            <use xlink:href="img/icons.svg#icon-user-x"></use>
-          </svg>
+          <i class="fa-solid fa-user"></i>
         </div>
         <h5 class="operations__header">
           No longer need your account? No problem! Close it instantly.
@@ -829,11 +824,11 @@ h4 {
     <section class="contact-section">
         <h1>Contact Us</h1>
         <div class="contact-details">
-          <h2><strong>Address:</strong> kalanki-13, Kathmandu Nepal</h2>
-          <h2><strong>Phone:</strong> +977 9841414150</h2>
-          <h2><strong>Email:</strong> rentyourhome@gmail.com</h2>
+          <h2><i class="fa-solid fa-house"></i>&nbsp;<strong>Address:</strong> kalanki-13, Kathmandu Nepal</h2>
+          <h2><i class="fa-solid fa-phone"></i>&nbsp;<strong>Phone:</strong> +977 9841414150</h2>
+          <h2><i class="fa-solid fa-envelope"></i>&nbsp;<strong>Email:</strong> rentyourhome@gmail.com</h2>
         </div>
-        <h2>Send us a message</h2>
+        <h2><i class="fa-solid fa-paper-plane"></i>&nbsp;Send us a message</h2>
         <!-- Your contact form goes here -->
       </section>
     </div>
