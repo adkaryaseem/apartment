@@ -1,39 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="../images/logo_1_criwwp.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
     <link rel="stylesheet" type="text/css" href="../Employee/style copy.css">
+    <link rel="stylesheet" href="../style/style-admin-dashboard-1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        .slideshow {
-            position: relative;
-            overflow: hidden;
-            max-width: 100%;
-            animation: fadeInFromLeft 1.5s ease;
-        }
-
-        .image__container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            border-radius: 10px;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-            transition: opacity 1s ease-in-out;
-        }
-
-        /* Add a class to the visible image container */
-        .image__container.active {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body>
-
 <div class="sidebar">
     <img src="../images/logo for rental home.png" class="logo">
     <i class="fa fa-chevron-left menu-icon"></i>
@@ -56,7 +31,6 @@
         <li><i class="fa-solid fa-power-off"></i><a href="../"> Logout</a></li>
     </ul>
 </div>
-
 <div class="main">
     <div class="main-top">
         <input type="text" name="" class="input" placeholder="Search">
