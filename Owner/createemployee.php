@@ -25,16 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $admin_id = NULL;
     $owner_id = NULL;
 
-    if (!isset($_SESSION['admin_id']) && !isset($_SESSION['owner_id'])) {
-    header("Location: login.php");
-    exit;
-}
+   
 
     
     // Prepare SQL statement to insert employee details
     $stmt = $conn->prepare("INSERT INTO employee (first_name, last_name, email, phone_number, username, password,admin_id,owner_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password," . ($admin_id ? "$admin_id" : "NULL") . ", 
-                " . ($owner_id ? "'$owner_id'" : "NULL") . ");
+    $stmt->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password );
     
     // Execute the prepared statement
     if ($stmt->execute() === TRUE) {
