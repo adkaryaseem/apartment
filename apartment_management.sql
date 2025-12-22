@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2025 at 04:51 PM
+-- Generation Time: Dec 22, 2025 at 05:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `username`, `password`, `email`, `phone_number`) VALUES
-(1, 'aseem', '12345', 'aseemadkary.official@gmail.com', '9861296569');
+(1, 'aseem', '$2y$10$x/mLTcWRNTNDv83sSmQtFes5YiLtqz/lIG8brQ2fJZfkKHnmGDQY2', 'aseemadkary.official@gmail.com', '9861296569');
 
 -- --------------------------------------------------------
 
@@ -80,18 +80,6 @@ CREATE TABLE `complaint` (
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `complaint`
---
-
-INSERT INTO `complaint` (`complaint_id`, `description`, `tenant_id`, `owner_id`, `employee_id`) VALUES
-(9, 'HELLO', 12, NULL, 4),
-(10, 'This is a complaint regarding the water supply, Kindly Fix the Connection at the earliest', 12, NULL, 5),
-(11, 'n;kvafd;fvn', 14, NULL, 5),
-(12, 'Water Shortage at Room 101, Please Look into it.', 15, NULL, 5),
-(13, 'Water Shortage at Room 101, Please Look into it.', 15, NULL, 5),
-(14, 'Electricity issue', 17, NULL, 5);
-
 -- --------------------------------------------------------
 
 --
@@ -119,9 +107,9 @@ CREATE TABLE `employee` (
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
   `admin_id` int(11) DEFAULT NULL,
+  `owner_id` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `owner_id` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,9 +117,10 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `email`, `phone_number`, `admin_id`, `username`, `password`, `owner_id`, `name`) VALUES
-(16, 'Suman', 'Thapa', 'thapa@gmail.com', '9881054210', NULL, 'sthapa', 'sthapa', NULL, ''),
-(14, 'Ram', 'Bhandari', 'ram@gmail.com', '9841545412', NULL, 'ram', 'ram', NULL, '');
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `email`, `phone_number`, `admin_id`, `owner_id`, `username`, `password`, `name`) VALUES
+(28, 'Ram', 'Shrestha', 'shrestha@gmail.com', '9845452132', 1, NULL, 'ram', 'ram', ''),
+(29, 'Ashim', 'Adhikari', 'adkaryaseem.official@gmail.com', '9861296569', 1, NULL, 'ashim', 'ashim', ''),
+(27, 'Ashim', 'Adhikari', 'adkaryaseem.official@gmail.com', '9861296569', 1, NULL, 'ashim', 'ashim', '');
 
 -- --------------------------------------------------------
 
@@ -152,8 +141,7 @@ CREATE TABLE `enquiries` (
 --
 
 INSERT INTO `enquiries` (`enquiry_id`, `name`, `email`, `contact`, `enquiry_date`) VALUES
-(1, 'Abhishek', 'abhis@gmail.com', '9873425353', '2024-02-26 22:18:43'),
-(3, 'Sheldon', 'sheldoncoop@gmail.com', '1231231234', '2024-03-17 07:46:01');
+(1, 'Ashim Adhikari', 'adkaryaseem.official@gmail.com', '9861296569', '2025-12-22 16:05:18');
 
 -- --------------------------------------------------------
 
@@ -215,7 +203,6 @@ CREATE TABLE `owner` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `admin_id` int(11) DEFAULT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -224,9 +211,9 @@ CREATE TABLE `owner` (
 -- Dumping data for table `owner`
 --
 
-INSERT INTO `owner` (`owner_id`, `first_name`, `last_name`, `email`, `phone_number`, `admin_id`, `username`, `password`) VALUES
-(6, 'Sandhya', 'Prithvi', 'sandhyaprithvi@gmail.com', '9739550101', 1, 'sandhya', '12345'),
-(8, 'zz', 'aaaaabhyu', 'abhyu@gmail.com', '87878787', 1, 'abhyu', '12345');
+INSERT INTO `owner` (`owner_id`, `first_name`, `last_name`, `email`, `phone_number`, `username`, `password`) VALUES
+(6, 'Sandhya', 'Prithvi', 'sandhyaprithvi@gmail.com', '9739550101', 'sandhya', '12345'),
+(8, 'zz', 'aaaaabhyu', 'abhyu@gmail.com', '87878787', 'abhyu', '12345');
 
 -- --------------------------------------------------------
 
@@ -239,26 +226,6 @@ CREATE TABLE `parking` (
   `employee_id` int(11) NOT NULL,
   `parking_slot` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `parking`
---
-
-INSERT INTO `parking` (`id`, `employee_id`, `parking_slot`) VALUES
-(1, 5, '4'),
-(2, 5, '6'),
-(3, 5, '6'),
-(4, 5, '6'),
-(5, 5, '6'),
-(6, 5, '5'),
-(7, 5, '4'),
-(8, 5, '2'),
-(9, 5, '11'),
-(10, 5, '3'),
-(11, 5, '4'),
-(12, 5, '2'),
-(13, 5, '3'),
-(14, 5, '6');
 
 -- --------------------------------------------------------
 
@@ -500,8 +467,7 @@ ALTER TABLE `maintenance_payment`
 --
 ALTER TABLE `owner`
   ADD PRIMARY KEY (`owner_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `parking`
@@ -570,7 +536,7 @@ ALTER TABLE `apartment`
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `complaints`
@@ -582,13 +548,13 @@ ALTER TABLE `complaints`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `enquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `enquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hotel`
@@ -612,7 +578,7 @@ ALTER TABLE `owner`
 -- AUTO_INCREMENT for table `parking`
 --
 ALTER TABLE `parking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `parking_slot`
