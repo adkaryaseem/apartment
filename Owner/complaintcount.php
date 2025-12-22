@@ -135,7 +135,7 @@ $conn->close();
         </form>
     </div>
     <div>
-        <a href="owner_dashboard.php" class="back-button">Return Home</a>
+        <a href="./" class="back-button">Return Home</a>
     </div>
 </body>
 </html>

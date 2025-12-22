@@ -128,7 +128,7 @@ body {
         $conn->close();
         ?>
         <br>
-        <a href="owner_dashboard.php" class="back-button">Return Home</a>
+        <a href="./" class="back-button">Return Home</a>
         <a href="createemployee.php" class="create-employee-button">Create Employee</a>
     </div>
 </body>

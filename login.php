@@ -21,7 +21,7 @@
             <form class="login__form">
                 <div>
                     <h1 class="login__title">
-                        <span>Welcome</span> Back
+                        <span>Welcome</span> Back User
                     </h1>
 
                     <p class="login__description">

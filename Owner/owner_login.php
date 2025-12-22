@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $_SESSION["owner_id"] = $row["owner_id"]; // Set owner_id in session
-        header("Location: owner_dashboard.php");
+        header("Location: ./");
         exit();
     } else {
         $errorMessage = "Invalid username or password";

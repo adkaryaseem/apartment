@@ -3,86 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style-fee-received.css">
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <title>View Maintenance Fees</title>
-    <style>
-                body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .back-button:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
     <h2>Select Tenant to View Maintenance Fees</h2>
@@ -110,6 +33,9 @@
             ?>
         </select>
         <input type="submit" value="View Fees">
+        <div class="return">
+        <a href="owner_dashboard.php" class="back-button">Return Home</a>
+    </div>
     </form>
 
     <?php
@@ -118,12 +44,8 @@
         $selected_tenant_id = $_POST["tenant_name"];
 
         // Database connection
-        $conn = new mysqli($servername, $username, $password, $database);
 
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+            $conn = connect();
 
         // Query to retrieve maintenance fees paid by the selected tenant
         $fee_query = "SELECT payment_id, amount_paid, payment_date FROM maintenance_payment WHERE tenant_id = $selected_tenant_id";
@@ -150,6 +72,5 @@
         $conn->close();
     }
     ?>
-        <a href="owner_dashboard.php" class="back-button">Return Home</a>
 </body>
 </html>

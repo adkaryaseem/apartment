@@ -64,9 +64,10 @@ if (isset($_GET["logout"]) && $_GET["logout"] == true) {
     // Destroy the session
     session_destroy();
     // Redirect to login page
-    header("Location: login.php");
+    header("Location: ./");
     exit;
 }
+session_destroy();
 
 // Close database connection
 $conn->close();

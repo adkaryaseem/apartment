@@ -7,6 +7,12 @@ $conn = connect();
 // Initialize success message variable
 $success_message = "";
 
+//checking who logged in owner or admin
+$_SESSION['admin_id'] = $row['admin_id'];
+unset($_SESSION['owner_id']);
+$_SESSION['owner_id'] = $row['owner_id'];
+unset($_SESSION['admin_id']);
+
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and get input data
@@ -16,10 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_number = sanitize_input($_POST["phone_number"]);
     $username = sanitize_input($_POST["username"]);
     $password = sanitize_input($_POST["password"]);
+    $admin_id = NULL;
+    $owner_id = NULL;
+
+    if (!isset($_SESSION['admin_id']) && !isset($_SESSION['owner_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
     
     // Prepare SQL statement to insert employee details
-    $stmt = $conn->prepare("INSERT INTO employee (first_name, last_name, email, phone_number, username, password) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
+    $stmt = $conn->prepare("INSERT INTO employee (first_name, last_name, email, phone_number, username, password,admin_id,owner_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password," . ($admin_id ? "$admin_id" : "NULL") . ", 
+                " . ($owner_id ? "'$owner_id'" : "NULL") . ");
     
     // Execute the prepared statement
     if ($stmt->execute() === TRUE) {
@@ -150,6 +165,6 @@ $conn->close();
             <input type="submit" value="Create Employee">
         </form>
     </div>
-    <a href="../admin/admin_dashboard.php" class="back-button">Return Home</a>
+    <a href="./" class="back-button">Return Home</a>
 </body>
 </html>
