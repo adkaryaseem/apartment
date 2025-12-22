@@ -1,3 +1,11 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: admin_login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +31,7 @@
             <li><a href="../tenant/tenant_dashboard.php"><span class="dot"></span> Tenant</a></li>
         </ul>
         <p class="app">Admin Control</p>
-        <li><i class="fa fa-calendar"></i><a href="../owner/viewempl.php"> Employee Details</a></li>
+        <li><i class="fa fa-calendar"></i><a href="viewempl.php"> Employee Details</a></li>
         <li><i class="fa fa-clone"></i><a href="viewenq.php"> View Enquiries</a></li>
         <li><i class="fa fa-user"></i><a href="parkingslot.php"> Parking</a></li>
         <li><i class="fa fa-shield"></i><a href="fees.php"> Fees</a></li>

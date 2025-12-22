@@ -1,0 +1,65 @@
+body {
+    background-image: url('../images/1.jpg'); /* Replace 'your_background_image.jpg' with your image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .back-button, .delete-button, .create-employee-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover, .delete-button:hover, .create-employee-button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+
+        .delete-button:hover {
+            background-color: #da190b;
+        }

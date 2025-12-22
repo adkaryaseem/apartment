@@ -1,0 +1,64 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('../images/1.png'); /* Adjust the image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .export-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .export-button:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+        .return-button {
+            background-color: #008CBA; /* Blue */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .return-button:hover {
+            background-color: #0073e6; /* Darker Blue */
+        }

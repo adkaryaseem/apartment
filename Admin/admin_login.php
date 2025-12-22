@@ -1,28 +1,47 @@
 <!-- phpo code starts here -->
 <?php
 session_start();
-include ('../config.php');
 
+if (isset($_SESSION['admin_id'])) {
+    header("Location: ./");
+    exit;
+}
+
+include_once ('../config.php');
 $conn = connect();
 
+$errorMessage = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $username = trim($_POST["username"]);
     $password = $_POST["password"];
 
-    $sql = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
+    // Use prepared statement for security
+    $stmt = $conn->prepare("SELECT admin_id, password FROM admin WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $result = $conn->query($sql);
+    if ($result && $result->num_rows === 1) {
+        $row = $result->fetch_assoc();
 
-    if ($result && $result->num_rows > 0) {
-        header("Location: admin_dashboard.php");
-        exit();
+        // Verify the password against the hashed password
+        if (password_verify($password, $row['password'])) {
+            // Set session
+            $_SESSION['admin_id'] = $row['admin_id'];
+            header("Location: ./");
+            exit();
+        } else {
+            $errorMessage = "Invalid username or password";
+        }
     } else {
-        $errorMessage = "Invalid username or password"; // Set error message if login fails
+        $errorMessage = "Invalid username or password";
     }
 }
 
 $conn->close();
 ?>
+
 <!-- php code ends here -->
 <!-- Html Code start here -->
 <!DOCTYPE html>

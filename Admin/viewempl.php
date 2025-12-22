@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/style-view-empl.css">
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
-    <title>View Employees</title>
+    <title>View Employees</title>    
 </head>
 <body>
     <div class="container">
@@ -14,7 +14,7 @@
         session_start();
 
         // Database connection parameters
-        include ('../config.php');
+        include_once ('../config.php');
 
         $conn = connect();
 
