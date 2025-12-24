@@ -1,5 +1,6 @@
 <?php
-session_start();
+include('../auth.php');
+
 include ('../config.php');
 
 $conn = connect();

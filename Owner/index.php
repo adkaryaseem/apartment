@@ -1,3 +1,12 @@
+<?php 
+include('../auth.php');
+
+$ownerId = $_SESSION['owner_id'];
+
+$_SESSION['owner_id'] = $ownerId;
+session_regenerate_id(true);
+$_SESSION['LAST_ACTIVITY'] = time();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +28,7 @@
                 <h3>Please select an option:</h3>
             </div>
             <div class="logout">
-                <a href="../index.php" class="logout-btn">Logout</a>
+                <a href="../logout.php" class="logout-btn">Logout</a>
             </div>
         </div>
         <ul>

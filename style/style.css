@@ -19,7 +19,7 @@ body{background: var(--black); height: 100vh; overflow: hidden;}
 box-shadow: var(--shadow);}
 .main{max-width: 100%; width: 79.1%; float: left; padding: 25px;}
 .logo span{font-size: 20px; color: var(--font-light); font-weight: normal;}
-.logo{color: var(--blue); font-weight: bold;font-size: 20px;}
+.logo{color: var(--blue); font-weight: bold;font-size: 20px;width:205px; height: 110px;}
 .menu-icon{background: var(--blue);
     border-radius: 21px;
     height: 25px;

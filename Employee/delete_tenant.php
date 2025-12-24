@@ -1,4 +1,5 @@
 <?php
+include ('../auth.php');
 session_start();
 
 include ('../config.php');

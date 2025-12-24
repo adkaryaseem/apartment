@@ -1,4 +1,6 @@
 <?php
+include('../auth.php');
+
 // Database connection parameters
 include ('../config.php');
 

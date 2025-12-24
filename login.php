@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: " . $routes[$userType]);
         exit;
     } else {
+        header("Location: login.php");
         $error = "Please select a user type";
     }
 }

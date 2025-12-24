@@ -1,13 +1,8 @@
 <!-- phpo code starts here -->
 <?php
 session_start();
-
-if (isset($_SESSION['admin_id'])) {
-    header("Location: ./");
-    exit;
-}
-
 include_once ('../config.php');
+
 $conn = connect();
 
 $errorMessage = '';
@@ -49,9 +44,11 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <link rel="stylesheet" href="../style/style-admin-login.css">
+    <title>Admin Login</title>
 </head>
 <body>
     <div class="container">
@@ -80,6 +77,7 @@ $conn->close();
                             <label for="password" class="login__label">Password:</label>
                             <div class="login__box">
                                 <input class="login__input" type="password" id="password" name="password" required>
+                                <!-- <i class="fa-solid fa-eye login__eye" id="input-icon"></i> -->
                                 <i class="ri-eye-off-line login__eye" id="input-icon"></i>
                             </div>
                         </div>
@@ -94,6 +92,6 @@ $conn->close();
             </div>
         </div>
     </div>
-    <script src="../script/admin-login-script.js"></script>
+    <script src="../script/password-show-script.js"></script>
 </body>
 </html>

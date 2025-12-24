@@ -1,4 +1,6 @@
 <?php
+include('../auth.php');
+
 include ('../config.php');
 
 $conn = connect();

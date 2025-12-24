@@ -1,4 +1,5 @@
 <?php
+include ('../auth.php');
 // Database connection parameters
 include ('../config.php');
 
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_number = sanitize_input($_POST["phone_number"]);
     $age = sanitize_input($_POST["age"]);
     $dob = sanitize_input($_POST["dob"]);
+    $username =
     $owner_id = sanitize_input($_POST["owner_id"]);
 
     // Prepare SQL statement to insert tenant details

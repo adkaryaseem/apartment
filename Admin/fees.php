@@ -1,3 +1,7 @@
+<?php 
+include('../auth.php');
+include_once('../config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +83,6 @@
                 <th>Total Fees Paid</th>
             </tr>
             <?php
-            // Database connection parameters
-            include ('../config.php');
-
             // Create connection
             $conn = connect();
             
@@ -116,6 +117,6 @@
             ?>
         </table>
     </div>
-    <a href="../admin/admin_dashboard.php" class="back-button">Return Home</a>
+    <a href="./" class="back-button">Return Home</a>
 </body>
 </html>

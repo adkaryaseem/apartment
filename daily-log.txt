@@ -1,0 +1,4 @@
+2025-12-23 12:04 pm
+auth create problem in login destroys session and had issue and is on hold for now
+auth is added in every page for verification of user login
+employee login redirection problem

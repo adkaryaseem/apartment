@@ -2,29 +2,36 @@
 // Start the session
 session_start();
 
-include ('../config.php');
+include_once ('../config.php');
 
 $conn = connect();
 
+$errorMessage = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $username = trim($_POST["username"]);
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT employee_id FROM employee WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    $stmt = $conn->prepare("SELECT employee_id, password FROM employee WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result && $result->num_rows > 0) {
+    if ($result && $result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $_SESSION["employee_id"] = $row["employee_id"]; // Set owner_id in session
-        header("Location: ./empdashboard.php");
-        exit();
-    } else {
+
+        if (password_verify($password, $row['password'])) {
+            // Set session
+            $_SESSION['employee_id'] = $row['employee_id'];
+            header("Location: ./");
+            exit();
+        } else {
+            $errorMessage = "Invalid username or password";
+        }
+    }
+    else {
         $errorMessage = "Invalid username or password";
     }
-
-    $stmt->close();
 }
 
 $conn->close();
@@ -35,17 +42,18 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../style/style-employee-login.css">
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
-    <title>Admin Login</title>
+    <title>Employee Login</title>
 </head>
 <body>
     <div class="container">
         <div class="login">
             <div class="login__content">
-                <img class="login__img" src="../images/../images/logo-no-bg.png" alt="Login image" />
+                <img class="login__img" src="../images/logo-no-bg.png" alt="Login image" />
 
-                <form id="loginForm" method="GET" class="login__form">
+                <form id="loginForm" method="POST" class="login__form">
                     <div>
                         <h1 class="login__title">
                             <span>Welcome</span> Back Employee
@@ -70,11 +78,9 @@ $conn->close();
                             </div>
                         </div>
                     </div>
-
                     <div>
                         <button type="submit" class="login__button">Login</button>
                     </div>
-
                     <div id="errorContainer" class="login__error"><?php echo isset($errorMessage) ? $errorMessage : ''; ?></div>
                 </form>
             </div>
@@ -82,37 +88,7 @@ $conn->close();
     </div>
 
     <!--=============== MAIN JS ===============-->
-    <script>
-        /*=============== SHOW HIDDEN - PASSWORD ===============*/
-const showHiddenPassword = (inputPassword, inputIcon) => {
-  const input = document.getElementById(inputPassword),
-        iconEye = document.getElementById(inputIcon)
+       <script src="../script/password-show-script.js"></script>
 
-  iconEye.addEventListener('click', () => {
-    // Change password to text
-    if (input.type === 'password') {
-      // Switch to text
-      input.type = 'text'
-
-      // Add icon
-      iconEye.classList.add('ri-eye-line')
-
-      // Remove icon
-      iconEye.classList.remove('ri-eye-off-line')
-    } else {
-      // Change to password
-      input.type = 'password'
-
-      // Remove icon
-      iconEye.classList.remove('ri-eye-line')
-
-      // Add icon
-      iconEye.classList.add('ri-eye-off-line')
-    }
-  })
-}
-
-showHiddenPassword('password', 'input-icon')
-    </script>
 </body>
 </html>

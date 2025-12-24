@@ -1,30 +1,37 @@
 <?php
 // Start the session
 session_start();
-
-include ('../config.php');
+include_once ('../config.php');
 
 $conn = connect();
 
+$errorMessage = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $username = trim($_POST["username"]);
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT owner_id FROM owner WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    // Use prepared statement for security
+    $stmt = $conn->prepare("SELECT owner_id, password FROM owner WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result && $result->num_rows > 0) {
+    if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
-        $_SESSION["owner_id"] = $row["owner_id"]; // Set owner_id in session
-        header("Location: ./");
-        exit();
+
+        // Verify the password against the hashed password
+        if (password_verify($password, $row['password'])) {
+            // Set session
+            $_SESSION['owner_id'] = $row['owner_id'];
+            header("Location: ./");
+            exit();
+        } else {
+            $errorMessage = "Invalid username or password";
+        }
     } else {
         $errorMessage = "Invalid username or password";
     }
-
-    $stmt->close();
 }
 
 $conn->close();
@@ -35,6 +42,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <title>Owner Login</title>
     <style>
@@ -118,12 +127,17 @@ $conn->close();
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+           <div class="login__box">
+                                <input class="login__input" type="password" id="password" name="password" required>
+                                <!-- <i class="fa-solid fa-eye login__eye" id="input-icon"></i> -->
+                                <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                            </div>
             <button type="submit">Login</button>
         </form>
 
         <!-- Display error message if any -->
         <div id="errorContainer"><?php echo isset($errorMessage) ? $errorMessage : ''; ?></div>
     </div>
+    <script src="../script/password-show-script.js"></script>
 </body>
 </html>

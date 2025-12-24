@@ -1,4 +1,6 @@
 <?php
+include ('../auth.php');
+
 // Start the session
 session_start();
 

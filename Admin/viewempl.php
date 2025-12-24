@@ -1,3 +1,8 @@
+<?php
+include('../auth.php');
+
+include_once ('../config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +15,6 @@
 <body>
     <div class="container">
         <?php
-        // Start session
-        session_start();
-
-        // Database connection parameters
-        include_once ('../config.php');
-
         $conn = connect();
 
         // Check if a deletion request is made

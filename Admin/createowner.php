@@ -1,4 +1,6 @@
 <?php
+include('../auth.php');
+
 include ('../config.php');
 
 $conn = connect();
@@ -11,23 +13,24 @@ function sanitize_input($data) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = sanitize_input($_POST["username"]);
-    $password = sanitize_input($_POST["password"]);
     $first_name = sanitize_input($_POST["first_name"]);
     $last_name = sanitize_input($_POST["last_name"]);
     $email = sanitize_input($_POST["email"]);
+    $username = sanitize_input($_POST["username"]);
+    $password = $_POST["password"];
     $phone_number = sanitize_input($_POST["phone_number"]);
     $admin_id = sanitize_input($_POST["admin_id"]);
 
-    $stmt = $conn->prepare("INSERT INTO owner (username, password, first_name, last_name, email, phone_number, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $username, $password, $first_name, $last_name, $email, $phone_number, $admin_id);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO owner (first_name, last_name, email, username, password, phone_number, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssi", $first_name, $last_name, $email,$username, $password, $phone_number, $admin_id);
 
     if ($stmt->execute() === TRUE) {
-        echo "New Manager created successfully";
+        echo "New Owner created successfully";
     } else {
         echo "Error: " . $stmt->error;
     }
-
     $stmt->close();
 }
 
@@ -111,8 +114,8 @@ $conn->close();
 </head>
 <body>
     <div class="container">
-        <h2>Create Manager</h2>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <h2>Create Owner</h2>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
@@ -136,6 +139,6 @@ $conn->close();
             <input type="submit" value="Create Manager">
         </form>
     </div>
-    <a href="admin_dashboard.php" class="back-button">Return Home</a>
+    <a href="./" class="back-button">Return Home</a>
 </body>
 </html>

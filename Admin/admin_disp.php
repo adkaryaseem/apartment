@@ -121,7 +121,7 @@ $conn->close();
         ?>
     </table>
         <span class=btn-center>
-    <a href="admin_dashboard.php" class="back-button">Return Home</a>
+    <a href="./index.php" class="back-button">Return Home</a>
     </span>
 </body>
 </html>

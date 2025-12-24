@@ -1,4 +1,6 @@
 <?php
+include ('../auth.php');
+
 // Database connection parameters
 include ('../config.php');
 
@@ -57,38 +59,57 @@ function generateInvoice($service_name, $amount, $tenant_email, $file_path = nul
 }
 
 // Function to handle approval of service request
-function approveRequest($request_id, $service_name, $amount, $tenant_email) {
-    // Retrieve service cost from the database (if not provided explicitly)
-    $cost_query = "SELECT cost FROM services WHERE service_name = '$service_name'";
-    $cost_result = $conn->query($cost_query);
+function approveRequest($request_id, $service_name, $tenant_email, $conn) {
 
-    if ($cost_result->num_rows > 0) {
-        $cost_row = $cost_result->fetch_assoc();
-        $amount = $cost_row['cost']; // Use the retrieved cost
-    } else {
-        // Handle case where service cost is not found
-        // Handle case where service cost is not found:
-        // 1. Log the error for tracking purposes:
-            error_log("Service cost not found for service: $service_name. Request ID: $request_id");
-
-            // 2. Display an error message to the user:
-            echo "<script>alert('Service cost not found. Please contact the administrator to update the service cost in the database.');</script>";
-    
-            // 3. (Optional) Prevent further processing:
-            return; // Exit the function without generating invoice or sending email
-        }
-    
-        // Generate invoice (using the retrieved cost)
-        generateInvoice($service_name, $amount, $tenant_email);
-    
-        // Update database to mark service request as approved
-        $update_query = "UPDATE service_requests SET status = 'Approved' WHERE request_id = $request_id";
-        if ($conn->query($update_query) === TRUE) {
-            echo "Service request approved successfully.";
-        } else {
-            echo "Error updating record: " . $conn->error;
-        }
+    // 🔐 Allow only admins
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+        error_log("Unauthorized approval attempt. User ID: " . ($_SESSION['user_id'] ?? 'unknown'));
+        exit("Unauthorized access");
     }
+
+    // Validate request ID
+    $request_id = filter_var($request_id, FILTER_VALIDATE_INT);
+    if (!$request_id) {
+        return false;
+    }
+
+    /* 1. Get service cost */
+    $stmt = $conn->prepare(
+        "SELECT cost FROM services WHERE service_name = ?"
+    );
+    $stmt->bind_param("s", $service_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        error_log("Service cost not found: $service_name");
+        return false;
+    }
+
+    $row = $result->fetch_assoc();
+    $amount = $row['cost'];
+
+    /* 2. Approve request */
+    $stmt2 = $conn->prepare(
+        "UPDATE service_requests
+         SET status = ?, amount = ?
+         WHERE id = ?"
+    );
+
+    $status = "Approved";
+    $stmt2->bind_param("sdi", $status, $amount, $request_id);
+
+    if (!$stmt2->execute()) {
+        error_log("Failed to approve request ID: $request_id");
+        return false;
+    }
+
+    /* 3. Generate invoice */
+    generateInvoice($service_name, $amount, $tenant_email);
+
+    return true;
+}
+
     
     // Function to handle denial of service request
     function denyRequest($tenant_email) {
@@ -102,60 +123,9 @@ function approveRequest($request_id, $service_name, $amount, $tenant_email) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style/style-view-request.css">
     <title>View Service Requests</title>
-    <style>
-        p {
-  background-image: url('../images/1.jpg');
-}
-body {
-            font-family: Arial, sans-serif;
-            background-color: #56cdc2;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .btn {
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-approve {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-
-        .btn-deny {
-            background-color: #f44336;
-            color: white;
-            border: none;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -163,7 +133,7 @@ body {
         <table>
             <table background="/wp-content/uploads/wov.png">
             <tr>
-                <th>Request ID</th>
+                <th>S.N</th>
                 <th>Tenant Name</th>
                 <th>Service Name</th>
                 <th>Requested Time</th>
@@ -171,9 +141,10 @@ body {
             </tr>
             <?php
             if ($request_result->num_rows > 0) {
+                $index=1;
                 while ($row = $request_result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["request_id"] . "</td>";
+                    echo "<td>" . $index . "</td>";
                     echo "<td>" . $row["tenant_name"] . "</td>";
                     echo "<td>" . $row["service_name"] . "</td>";
                     echo "<td>" . $row["requested_time"] . "</td>";
@@ -183,10 +154,12 @@ body {
                     echo "<a href='deny_request.php?tenant_email=" . $row["tenant_email"] . "' class='btn btn-deny'>Deny</button>";
                     echo "</td>";
                     echo "</tr>";
+                    }
+                        $index++;
+                } 
+                else {
+                    echo "<tr><td colspan='5'>No service requests found</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='5'>No service requests found</td></tr>";
-            }
             ?>
         </table>
         

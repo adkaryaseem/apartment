@@ -35,6 +35,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <link rel="stylesheet" href="../style/style-tenant-login.css">
     <title>Tenant Login</title>
@@ -83,37 +84,6 @@ $conn->close();
     </div>
 
     <!--=============== MAIN JS ===============-->
-    <script>
-        /*=============== SHOW HIDDEN - PASSWORD ===============*/
-const showHiddenPassword = (inputPassword, inputIcon) => {
-  const input = document.getElementById(inputPassword),
-        iconEye = document.getElementById(inputIcon)
-
-  iconEye.addEventListener('click', () => {
-    // Change password to text
-    if (input.type === 'password') {
-      // Switch to text
-      input.type = 'text'
-
-      // Add icon
-      iconEye.classList.add('ri-eye-line')
-
-      // Remove icon
-      iconEye.classList.remove('ri-eye-off-line')
-    } else {
-      // Change to password
-      input.type = 'password'
-
-      // Remove icon
-      iconEye.classList.remove('ri-eye-line')
-
-      // Add icon
-      iconEye.classList.add('ri-eye-off-line')
-    }
-  })
-}
-
-showHiddenPassword('password', 'input-icon')
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </body>
 </html>

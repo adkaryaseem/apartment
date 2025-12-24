@@ -1,5 +1,6 @@
 <?php
-include ('../config.php');
+include('../auth.php');
+include_once ('../config.php');
 
 // Check if slotNumber and employeeId are set in the POST request
 if (isset($_POST['slotNumber'], $_POST['employeeId'])) {

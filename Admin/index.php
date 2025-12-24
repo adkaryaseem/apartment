@@ -1,10 +1,11 @@
 <?php 
-session_start();
+include('../auth.php');
 
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: admin_login.php");
-    exit;
-}
+$adminId = $_SESSION['admin_id'];
+
+$_SESSION['admin_id'] = $adminId;
+session_regenerate_id(true);
+$_SESSION['LAST_ACTIVITY'] = time();
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,13 +13,12 @@ if (!isset($_SESSION['admin_id'])) {
     <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
-    <link rel="stylesheet" type="text/css" href="../Employee/style copy.css">
-    <link rel="stylesheet" href="../style/style-admin-dashboard-1.css">
+    <link rel="stylesheet" href="../style/style-admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <div class="sidebar">
-    <img src="../images/logo for rental home.png" class="logo">
+    <img src="../images/logo-no-bg.png" class="logo">
     <i class="fa fa-chevron-left menu-icon"></i>
     <ul class="sidenav">
         <li class="active"><i class="fa fa-home"></i><a href=""> Dashboard
@@ -36,7 +36,7 @@ if (!isset($_SESSION['admin_id'])) {
         <li><i class="fa fa-user"></i><a href="parkingslot.php"> Parking</a></li>
         <li><i class="fa fa-shield"></i><a href="fees.php"> Fees</a></li>
         <li><i class="fa fa-file-text"></i><a href="export.php"> Export Data</a></li>
-        <li><i class="fa-solid fa-power-off"></i><a href="../"> Logout</a></li>
+        <li><i class="fa-solid fa-power-off"></i><a href="../logout.php"> Logout</a></li>
     </ul>
 </div>
 <div class="main">

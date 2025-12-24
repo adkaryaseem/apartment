@@ -1,4 +1,6 @@
 <?php
+include('../auth.php');
+
 // Database connection details (replace with your actual credentials)
 include ('../config.php');
 

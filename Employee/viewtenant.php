@@ -1,7 +1,7 @@
 <?php
-// Start the session
-session_start();
+include ('../auth.php');
 
+//connecting db
 include ('../config.php');
 
 $conn = connect();
@@ -180,7 +180,7 @@ $tenant_result = $conn->query($tenant_query);
             window.location = "edit_tenant.php?tenant_id=" + tenant_id;
         }
     </script>
-    <a href="empdashboard.php" class="back-button">Return Home</a>
+    <a href="./index.php" class="back-button">Return Home</a>
 </body>
 </html>
 
