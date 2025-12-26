@@ -1,4 +1,17 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo-no-bg.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style/style-create-owner.css">
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Create Owner</title>
+</head>
+<body>
+    <?php
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 include('../auth.php');
 
 include ('../config.php');
@@ -6,10 +19,22 @@ include ('../config.php');
 $conn = connect();
 
 function sanitize_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+function sweetAlert($type, $title, $message, $redirect = null) {
+    $redirectScript = $redirect 
+        ? ".then(() => { window.location.href = '$redirect'; })" 
+        : "";
+    echo "
+    <script>
+        Swal.fire({
+            icon: '$type',
+            title: " . json_encode($title) . ",
+            text: " . json_encode($message) . ",
+            confirmButtonColor: '#2563eb'
+        })$redirectScript;
+    </script>";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,18 +44,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = sanitize_input($_POST["username"]);
     $password = $_POST["password"];
     $phone_number = sanitize_input($_POST["phone_number"]);
-    $admin_id = sanitize_input($_POST["admin_id"]);
+    $flat_id = sanitize_input($_POST["flat_id"]);
+    // $admin_id = sanitize_input($_POST["admin_id"]);
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO owner (first_name, last_name, email, username, password, phone_number, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $first_name, $last_name, $email,$username, $password, $phone_number, $admin_id);
+    $stmt = $conn->prepare("INSERT INTO owner (first_name, last_name, email, username, password, phone_number,flat_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $first_name, $last_name, $email, $username, $hashed_password, $phone_number, $flat_id);
 
-    if ($stmt->execute() === TRUE) {
-        echo "New Owner created successfully";
-    } else {
-        echo "Error: " . $stmt->error;
+
+    try {
+
+    /* ========= VALIDATION ERRORS ========= */
+    if (empty($username)) {
+        sweetAlert('warning', 'Validation Error', 'Username is required');
+        exit;
     }
+
+    if (empty($password)) {
+        sweetAlert('warning', 'Validation Error', 'Password is required');
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        sweetAlert('warning', 'Invalid Email', 'Please enter a valid email address');
+        exit;
+    }
+
+    /* ========= DATABASE INSERT ========= */
+    $stmt->execute();
+
+    /* ========= SUCCESS ========= */
+    sweetAlert(
+        'success',
+        'Owner Created!',
+        'New owner has been added successfully.',
+        'createowners.php'   // redirect after success
+    );
+
+} catch (mysqli_sql_exception $e) {
+
+    /* ========= DATABASE ERRORS ========= */
+    switch ($e->getCode()) {
+
+        case 1062: // Duplicate entry
+            sweetAlert(
+                'error',
+                'Duplicate Entry',
+                'Username or email already exists. Please use a different one.'
+            );
+            break;
+
+        case 1452: // Foreign key constraint
+            sweetAlert(
+                'error',
+                'Invalid Reference',
+                'Selected flat does not exist.'
+            );
+            break;
+
+        case 1048: // Column cannot be null
+            sweetAlert(
+                'error',
+                'Missing Data',
+                'Required fields cannot be empty.'
+            );
+            break;
+
+        default: // Unknown DB error
+            sweetAlert(
+                'error',
+                'Database Error',
+                'Something went wrong. Please try again later.'
+            );
+
+            // Optional: log real error
+            error_log($e->getMessage());
+    }
+} catch (Throwable $e) {
+
+    /* ========= SYSTEM / PHP ERRORS ========= */
+    sweetAlert(
+        'error',
+        'System Error',
+        'Unexpected error occurred. Please contact administrator.'
+    );
+
+    error_log($e->getMessage());
+}
+
+
     $stmt->close();
 }
 
@@ -40,105 +143,36 @@ $admin_result = $conn->query($admin_query);
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Owner</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        select {
-            cursor: pointer;
-        }
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-right: 20px;
-        }
-
-        .back-button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
     <div class="container">
         <h2>Create Owner</h2>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required>
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
             <label for="phone_number">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" required>
+            <label for="flat_id">Flat Details:</label>
+            <input type="text" id="flat_id" name="flat_id" required>
             <label for="admin_id">Admin ID:</label>
             <select id="admin_id" name="admin_id" required>
-                <?php
-                while($row = $admin_result->fetch_assoc()) {
-                    echo "<option value='" . $row["admin_id"] . "'>" . $row["admin_id"] . " - " . $row["username"] . "</option>";
-                }
-                ?>
+                <?php while ($row = $admin_result->fetch_assoc()) { ?>
+                    <option value="<?= $row['admin_id'] ?>">
+                        <?= $row['username'] ?>
+                    </option>
+                <?php } ?>
             </select>
-            <input type="submit" value="Create Manager">
+            <div class="button">
+                <input type="submit" value="Create Owner">
+                <a href="./" class="back-button">Return Home</a>
+            </div>
         </form>
     </div>
-    <a href="./" class="back-button">Return Home</a>
 </body>
 </html>

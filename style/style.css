@@ -13,7 +13,7 @@
 }
 *{margin: 0px; padding: 0px; font-family: 'Montserrat', sans-serif;}
 .clearfix{clear: both;}
-body{background: var(--black); height: 100vh; overflow: hidden;}
+body{background: var(--black); height: 100vh; width: 100vw; overflow: hidden;}
 .sidebar{width: 220px; background: var(--darkblue); padding:25px; 
 	height: 100%; position: relative;transition: 1s ease-in-out; float: left;
 box-shadow: var(--shadow);}
@@ -383,8 +383,14 @@ table th {font-size: .85em;letter-spacing: .1em;text-transform: uppercase;}
     color: var(--font-color);
     text-align: center;
 }
-.slideshow {
-    position: relative;
+.owl-carousel {
+    position: absolute;
+}
+
+.owl-carousel .item img{
+  height:100vh;
+  width: 100vw;
+  
 }
 
 .image__container {

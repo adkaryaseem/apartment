@@ -3,18 +3,19 @@ include('../auth.php');
 include_once ('../config.php');
 
 // Check if slotNumber and employeeId are set in the POST request
-if (isset($_POST['slotNumber'], $_POST['employeeId'])) {
+if (isset($_POST['slotNumber'], $_POST['employeeId'], $_POST['employeename'])) {
     // Get slot number and employee ID from POST data
     $slotNumber = $_POST['slotNumber'];
     $employeeId = $_POST['employeeId'];
+    $employeename = $_POST['employeename'];
     
     // Create database connection
     $conn = connect();
     
     // Insert parking slot allotment into the database
-    $sql = "INSERT INTO parking (employee_id, parking_slot) VALUES (?, ?)";
+    $sql = "INSERT INTO parking (employee_id, parking_slot, employeename) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $employeeId, $slotNumber);
+    $stmt->bind_param("is", $employeeId, $slotNumber, $employeename);
 
     // Execute prepared statement
     if ($stmt->execute() === TRUE) {

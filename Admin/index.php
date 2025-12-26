@@ -31,6 +31,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
             <li><a href="../tenant/tenant_dashboard.php"><span class="dot"></span> Tenant</a></li>
         </ul>
         <p class="app">Admin Control</p>
+        <li><i class="fa fa-calendar"></i><a href="createowner.php"> Create Owner</a></li>
         <li><i class="fa fa-calendar"></i><a href="viewempl.php"> Employee Details</a></li>
         <li><i class="fa fa-clone"></i><a href="viewenq.php"> View Enquiries</a></li>
         <li><i class="fa fa-user"></i><a href="parkingslot.php"> Parking</a></li>
@@ -61,16 +62,15 @@ $_SESSION['LAST_ACTIVITY'] = time();
         </div>
         <div class="clearfix"></div>
     </div>
-
-    <div class="owl-carousel owl-theme">
+    <div class="owl-carousel owl-theme" id="home-page">
         <div class="item">
             <img src="../images/1.jpg" alt="Indoor">        
         </div>
         <div class="item">
-            <img src="../images/1.jpg" alt="Indoor">        
+            <img src="../images/2.jpg" alt="Indoor">        
         </div>
         <div class="item">
-            <img src="../images/1.jpg" alt="Indoor">        
+            <img src="../images/3.jpg" alt="Indoor">        
         </div>
     </div>
     <!-- <div class="slideshow">
@@ -91,6 +91,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
     rtl:true,
     loop:true,
     margin:10,
+    autoplay:true,
     nav:true,
     responsive:{
         0:{

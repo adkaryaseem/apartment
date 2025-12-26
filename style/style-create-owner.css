@@ -1,49 +1,69 @@
         body {
             font-family: Arial, sans-serif;
-            background-color: #5d546f;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 500px;
-            margin: 20px auto;
-            background-color: #0e0248;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 15px rgba(33, 32, 32, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
             text-align: center;
-            color: #f5e2e2;
+            color: #333;
         }
         label {
             display: block;
-            margin-bottom: 3px;
-            color: #c1b0b0;
+            margin-bottom: 5px;
+            color: #555;
         }
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 2px;
+            padding: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            height: auto;
-            font-size: 13px;
+            font-size: 14px;
         }
-        .back-button,button {
+        select {
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .button{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .back-button {
             display: inline-block;
             padding: 10px 20px;
-            border: none;
             background-color: #4CAF50;
             color: white;
-            font-size: 15px;
             text-decoration: none;
             border-radius: 5px;
-            margin-left: 80px;
+            margin-right: 20px;
+            margin-left: 20px;
         }
-        .back-button,button:hover {
+        .back-button:hover {
             background-color: #45a049;
         }

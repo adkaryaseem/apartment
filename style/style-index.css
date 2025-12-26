@@ -20,9 +20,11 @@
   padding: 0;
   box-sizing: inherit;
 }
+
 a{
   text-decoration: none;
 }
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -244,11 +246,11 @@ form {
   color: var(--white);
   gap: 20rem;
 }
-.header-article{
+/* .header-article{
   width: 55rem;
-}
+} */
 .header-image img{
-  height: 30rem;
+  height: 40rem;
 }
 
 h1 {
@@ -687,7 +689,7 @@ h4 {
   .header-content {
   flex-direction: row;
   margin-top: 30px;
-  width:100vw;
+  /* width:100vw; */
   gap: 5em;
 }
 .header-article{
@@ -705,7 +707,7 @@ h4 {
   width:75vw;
 }
 .header-image img{
-  height: 15rem;
+  height: 30rem;
 }
 }
 @media screen and (min-width:320px) and (max-width:480px){
